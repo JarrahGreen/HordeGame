@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     int enemyX = 700;
     int enemyY = 500;
     int FPS = 60;
-    int numEnemy = 1;
+    int numEnemy = 5;
     boolean onePlayerSelected = false;
     boolean twoPlayerSelected = false;
     public BufferedImage background;
@@ -45,7 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
     // Create a player object
     PlayerOne playerOne = new PlayerOne(keyH);
     PlayerTwo playerTwo = new PlayerTwo(keyH);
-    Bullet bullet = new Bullet(keyH);
+
+    Bullet bullet = new Bullet(keyH, playerOne.getX(), playerOne.getY());
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -159,7 +160,11 @@ public class GamePanel extends JPanel implements Runnable {
         if (onePlayerSelected) {
             g.drawImage(background, 0, 0, null);
             playerOne.draw(g2, tileSize);
-            bullet.draw(g2);
+
+
+            if (keyH.shootBullet) {
+                bullet.draw(g2);
+            }
 
             for (Powerup powerup : powerUpList) {
                 powerup.draw(g2);
@@ -175,7 +180,11 @@ public class GamePanel extends JPanel implements Runnable {
             g.drawImage(background, 0, 0, null);
             playerOne.draw(g2, tileSize);
             playerTwo.draw(g2, tileSize);
-            bullet.draw(g2);
+
+
+            if (keyH.shootBullet) {
+                bullet.draw(g2);
+            }
 
             for (Powerup powerup : powerUpList) {
                 powerup.draw(g2);

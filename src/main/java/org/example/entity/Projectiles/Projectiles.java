@@ -7,16 +7,7 @@ import java.awt.*;
 
 public class Projectiles extends Entity {
     public final int radius = 10;
-    Color color;
-
-    Projectiles() {
-
-    }
-
-    public void hit(PlayerOne playerOne) {}
-
-    public void shoot() {}
-
+    Color color = Color.cyan;
 
     public void draw(Graphics2D g2) {
         g2.setColor(color);

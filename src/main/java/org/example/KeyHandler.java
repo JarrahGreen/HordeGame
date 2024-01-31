@@ -10,7 +10,7 @@ public class KeyHandler implements KeyListener {
             onePlayer = false, twoPlayer = false,
             hoveringOnePlayer = true, hoveringTwoPlayer = false,
             rightPressed = false, leftPressed = false, downPressed = false, upPressed = false,
-            bulletUp = false, bulletDown = false, bulletRight = false, bulletLeft = false;
+            bulletUp = false, bulletDown = false, bulletRight = false, bulletLeft = false, shootBullet = false;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -74,6 +74,7 @@ public class KeyHandler implements KeyListener {
 
         // Bullet shooting
         if (code == KeyEvent.VK_SPACE) {
+            shootBullet = true;
             if (upPressed) {
                 bulletUp = true;
             }
@@ -87,8 +88,6 @@ public class KeyHandler implements KeyListener {
                 bulletRight = true;
             }
         }
-
-
     }
 
     @Override
@@ -121,6 +120,10 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+
+        if (code == KeyEvent.VK_SPACE) {
+            shootBullet = false;
         }
 
     }

@@ -9,24 +9,12 @@ public class Bullet extends Projectiles{
 
     KeyHandler keyH;
 
-    public Bullet(KeyHandler keyH) {
+    public Bullet(KeyHandler keyH, int x, int y) {
         this.keyH = keyH;
-        setDefaultValues();
-        updateValues();
         shoot();
+        this.x = x;
+        this.y = y;
     }
-
-    public void setDefaultValues() {
-        color = Color.red;
-        //x = x.PlayerOne;
-        //y = y.PlayerOne;
-    }
-
-    public void updateValues() {
-        shoot();
-    }
-
-    public void hit(PlayerOne playerOne) {}
 
     public void shoot() {
         if (keyH.bulletUp) {

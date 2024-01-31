@@ -22,6 +22,14 @@ public class PlayerOne extends Entity{
         speed = 2;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public void setSpeed(int speed) {
         this.speed = speed;
     }
