@@ -36,12 +36,6 @@ public class Enemy extends Entity{
         if (playerY < y) {
             y -= speed;
         }
-
-
-
-
-        // TODO move towards player position
-
     }
 
     public void getEnemyImage() {

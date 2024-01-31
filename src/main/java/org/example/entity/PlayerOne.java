@@ -47,19 +47,17 @@ public class PlayerOne extends Entity{
 
     public void update() {
 
-        if(keyH.wPressed) {
+        if(keyH.wPressed && y > 0) {
             y -= speed;
-
-
         }
-        if(keyH.sPressed) {
+        if(keyH.sPressed && y < 528) {
             y += speed;
         }
-        if(keyH.aPressed) {
+        if(keyH.aPressed && x > 0) {
             x -= speed;
 
         }
-        if(keyH.dPressed) {
+        if(keyH.dPressed && x < 720) {
             x += speed;
         }
     }
