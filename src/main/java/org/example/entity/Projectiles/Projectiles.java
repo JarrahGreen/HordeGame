@@ -1,7 +1,6 @@
 package org.example.entity.Projectiles;
 
 import org.example.entity.Entity;
-import org.example.entity.PlayerOne;
 
 import java.awt.*;
 
@@ -11,7 +10,7 @@ public class Projectiles extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.setColor(color);
-        g2.fillOval(x, y, radius, radius);
+        g2.fillOval((x + 20), (y + 20), radius, radius);
     }
 
 

@@ -1,7 +1,7 @@
 package org.example;
 import javax.swing.JFrame;
 
-public class Main {
+public class  Main {
     public static void main(String[] args) {
         // todo PLayers shoot
         // todo help me

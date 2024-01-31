@@ -1,11 +1,13 @@
 package org.example.entity;
 import org.example.KeyHandler;
+import org.example.entity.Projectiles.Bullet;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+
 
 public class PlayerOne extends Entity{
     KeyHandler keyH;
@@ -22,11 +24,11 @@ public class PlayerOne extends Entity{
         speed = 2;
     }
 
-    public int getX() {
+    public int getX(int x) {
         return x;
     }
 
-    public int getY() {
+    public int getY(int y) {
         return y;
     }
 
@@ -47,12 +49,15 @@ public class PlayerOne extends Entity{
 
         if(keyH.wPressed) {
             y -= speed;
+
+
         }
         if(keyH.sPressed) {
             y += speed;
         }
         if(keyH.aPressed) {
             x -= speed;
+
         }
         if(keyH.dPressed) {
             x += speed;
@@ -63,5 +68,7 @@ public class PlayerOne extends Entity{
     public void draw(Graphics2D g2, int tileSize){
         BufferedImage image = this.image;
         g2.drawImage(image, x, y, tileSize, tileSize, null);
+        getY(y);
+        getX(x);
     }
 }

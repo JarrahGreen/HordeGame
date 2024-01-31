@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     PlayerOne playerOne = new PlayerOne(keyH);
     PlayerTwo playerTwo = new PlayerTwo(keyH);
 
-    Bullet bullet = new Bullet(keyH, playerOne.getX(), playerOne.getY());
+
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -98,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (onePlayerSelected || twoPlayerSelected) {
             playerOne.update();
             playerTwo.update();
+
 
             // Change the Enemy's x and y location
             for (Enemy e : enemyList) {
@@ -163,6 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             if (keyH.shootBullet) {
+                Bullet bullet = new Bullet(keyH, playerOne.x, playerOne.y);
                 bullet.draw(g2);
             }
 
@@ -183,6 +185,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             if (keyH.shootBullet) {
+                Bullet bullet = new Bullet(keyH, playerOne.x, playerOne.y);
                 bullet.draw(g2);
             }
 
