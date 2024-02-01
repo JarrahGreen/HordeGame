@@ -13,12 +13,12 @@ public class SpeedBoost extends Powerup {
 
     @Override
     public void collect(PlayerOne playerOne) {
-        playerOne.setSpeed(playerOne.speed + 2);
+        playerOne.setSpeed((playerOne.speed + 2));
     }
 
     @Override
     public void collect(PlayerTwo playerTwo) {
-        playerTwo.setSpeed(playerTwo.speed + 2);
+        playerTwo.setSpeed((playerTwo.speed + 2));
     }
 
 

@@ -8,6 +8,7 @@ import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 
 import java.io.File;
+import java.io.FileWriter;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -31,13 +32,9 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
-    // Enemy values
-    int i = 0;
-    int numEnemy = 5;
-    int enemyX = 700;
-    int enemyY = 500;
+    // Enemy Array
     ArrayList<Enemy> enemyList = new ArrayList<>();
-    ArrayList<Integer> enemyXY = new ArrayList<>();
+
 
     // FPS
     int FPS = 60;
@@ -86,18 +83,33 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public static void writeEnemy(ArrayList<Enemy> enemyList) {
+        try {
+            FileWriter myWriter = new FileWriter("Enemy.txt");
+            // myWriter.write(enemyList.toString());
+            myWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 
     @Override
     public void run() {
 
-        while (i < numEnemy) {
             // Todo enemy object
-            enemyList.add(new Enemy(enemyX, enemyY));
-            enemyY -= 100;
-            i++;
-        }
+
+            Enemy e1 = new Enemy(700, 500);
+
+            Enemy e2 = new Enemy(700, 600);
+
+            enemyList.add(e1);
+            enemyList.add(e2);
+
+
 
         int speedBoostX = (int) (Math.random() * 500);
         int speedBoostY = (int) (Math.random() * 500);
@@ -130,7 +142,6 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             // Change the Enemy's x and y location
-
             for (Enemy e : enemyList) {
                 e.updateValues(playerOne.x, playerOne.y);
 
@@ -138,7 +149,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             // todo write this to a file
-            // System.out.println(enemyList);
+            writeEnemy(enemyList);
 
 
             ArrayList<Powerup> toRemove = new ArrayList<>();
