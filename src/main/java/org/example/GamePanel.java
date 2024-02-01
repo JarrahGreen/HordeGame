@@ -7,6 +7,7 @@ import org.example.entity.Projectiles.Bullet;
 import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 
+import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -25,34 +26,43 @@ public class GamePanel extends JPanel implements Runnable {
     final int maxScreenRow = 12;
     final int screenWidth = tileSize * maxScreenCol; // 768 px
     final int screenHeight = tileSize * maxScreenRow; // 576 px
+
+    // Key handler and Game thread
+    KeyHandler keyH = new KeyHandler();
+    Thread gameThread;
+
+    // Enemy values
     int i = 0;
+    int numEnemy = 5;
     int enemyX = 700;
     int enemyY = 500;
+    ArrayList<Enemy> enemyList = new ArrayList<>();
+    ArrayList<Integer> enemyXY = new ArrayList<>();
+
+    // FPS
     int FPS = 60;
-    int numEnemy = 5;
+
+    // Player
     boolean onePlayerSelected = false;
     boolean twoPlayerSelected = false;
+
+    PlayerOne playerOne = new PlayerOne(keyH);
+    PlayerTwo playerTwo = new PlayerTwo(keyH);
+
+    // Images
     public BufferedImage background;
     public BufferedImage title1p;
     public BufferedImage title2p;
 
+    // Power Up
     ArrayList<Powerup> powerUpList = new ArrayList<>();
-    ArrayList<Enemy> enemyList = new ArrayList<>();
-
-    KeyHandler keyH = new KeyHandler();
-    Thread gameThread;
-
-    // Create a player object
-    PlayerOne playerOne = new PlayerOne(keyH);
-    PlayerTwo playerTwo = new PlayerTwo(keyH);
-
-
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        createFile();
     }
 
 
@@ -61,10 +71,29 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
+
+    public static void createFile() {
+        try {
+            File myObj = new File("Enemy.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     @Override
     public void run() {
 
         while (i < numEnemy) {
+            // Todo enemy object
             enemyList.add(new Enemy(enemyX, enemyY));
             enemyY -= 100;
             i++;
@@ -101,9 +130,16 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             // Change the Enemy's x and y location
+
             for (Enemy e : enemyList) {
                 e.updateValues(playerOne.x, playerOne.y);
+
+                //enemyXY.add(playerOne.x, playerOne.y);
             }
+
+            // todo write this to a file
+            // System.out.println(enemyList);
+
 
             ArrayList<Powerup> toRemove = new ArrayList<>();
             for (Powerup p : powerUpList) {
@@ -125,6 +161,9 @@ public class GamePanel extends JPanel implements Runnable {
             powerUpList.removeAll(toRemove);
         }
     }
+
+
+
 
 
     public void paintComponent(Graphics g) {
