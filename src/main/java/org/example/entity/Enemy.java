@@ -24,32 +24,20 @@ public class Enemy extends Entity{
 
     public void updateValues(int playerX, int playerY) {
 
-        int diffX = playerX - x;
-        int diffY = playerY - y;
-        float angle = (float) Math.atan2(diffY, diffX);
+        if (!hit) {
+            int diffX = x - playerX;
+            int diffY = y - playerY;
+            int total = diffX + diffY;
+            double totalX = (double) diffX /total;
+            double totalY = (double) diffY /total;
 
-        if (playerX > x && playerY > y) {
+            double test1 = (x-= totalX);
+            double test2 = (y-= totalY);
 
-            x += (int) (speed * Math.cos(angle));
-            y += (int) (speed * Math.sin(angle));
-        }
-
-        if (playerX < x && playerY < y) {
-            x -= (int) (speed * Math.cos(angle));
-            y -= (int) (speed * Math.sin(angle));
-        }
-
-        else if (playerX > x) {
-            x += speed;
-        }
-        else if (playerX < x) {
-            x -= speed;
-        }
-        else if (playerY > y) {
-            y += speed;
-        }
-        else if (playerY < y) {
-            y -= speed;
+            if (test1 == 0 && test2 == 0) {
+                System.out.println("hit");
+                hit = true;
+            }
         }
     }
 

@@ -7,8 +7,6 @@ import org.example.entity.Projectiles.Bullet;
 import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 
-import java.io.File;
-import java.io.FileWriter;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -59,7 +57,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-        createFile();
     }
 
 
@@ -69,30 +66,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
 
-    public static void createFile() {
-        try {
-            File myObj = new File("Enemy.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
 
-    public static void writeEnemy(ArrayList<Enemy> enemyList) {
-        try {
-            FileWriter myWriter = new FileWriter("Enemy.txt");
-            // myWriter.write(enemyList.toString());
-            myWriter.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
 
@@ -100,10 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
 
-            // Todo enemy object
-
-            Enemy e1 = new Enemy(700, 500);
-
+            Enemy e1 = new Enemy(300, 300);
             Enemy e2 = new Enemy(700, 600);
 
             enemyList.add(e1);
@@ -147,10 +120,6 @@ public class GamePanel extends JPanel implements Runnable {
 
                 //enemyXY.add(playerOne.x, playerOne.y);
             }
-
-            // todo write this to a file
-            writeEnemy(enemyList);
-
 
             ArrayList<Powerup> toRemove = new ArrayList<>();
             for (Powerup p : powerUpList) {
@@ -211,7 +180,9 @@ public class GamePanel extends JPanel implements Runnable {
         if (onePlayerSelected) {
             g.drawImage(background, 0, 0, null);
             playerOne.draw(g2, tileSize);
-
+            if (twoPlayerSelected) {
+                playerTwo.draw(g2, tileSize);
+            }
 
             if (keyH.shootBullet) {
                 Bullet bullet = new Bullet(keyH, playerOne.x, playerOne.y);
@@ -227,25 +198,6 @@ public class GamePanel extends JPanel implements Runnable {
                 e.draw(g2, tileSize);
             }
 
-        }
-        if (twoPlayerSelected) {
-            g.drawImage(background, 0, 0, null);
-            playerOne.draw(g2, tileSize);
-            playerTwo.draw(g2, tileSize);
-
-
-            if (keyH.shootBullet) {
-                Bullet bullet = new Bullet(keyH, playerOne.x, playerOne.y);
-                bullet.draw(g2);
-            }
-
-            for (Powerup powerup : powerUpList) {
-                powerup.draw(g2);
-            }
-
-            for (Enemy e : enemyList) {
-                e.draw(g2, tileSize);
-            }
         }
         g2.dispose();
     }
