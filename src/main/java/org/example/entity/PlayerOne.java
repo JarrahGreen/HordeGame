@@ -13,16 +13,12 @@ public class PlayerOne extends Entity{
     KeyHandler keyH;
 
     public PlayerOne(KeyHandler keyH) {
+        super(100, 100);
         this.keyH = keyH;
-        setDefaultValues();
+        this.speed = 2;
         getPlayerImage();
     }
 
-    public void setDefaultValues() {
-        x = 100;
-        y = 100;
-        speed = 2;
-    }
 
     public double getX(double x) {
         return x;

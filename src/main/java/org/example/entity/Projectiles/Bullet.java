@@ -1,34 +1,15 @@
 package org.example.entity.Projectiles;
-import org.example.KeyHandler;
-import org.example.entity.PlayerOne;
-
-import java.awt.*;
-
+import org.example.entity.Direction;
 
 public class Bullet extends Projectiles{
-
-    KeyHandler keyH;
-
-    public Bullet(KeyHandler keyH, double x, double y) {
-        this.keyH = keyH;
-        shoot();
-        this.x = x;
-        this.y = y;
+    private final Direction dir;
+    public Bullet(double x, double y, Direction dir) {
+        super(x, y);
+        this.dir = dir;
     }
 
-    public void shoot() {
-        if (keyH.bulletUp) {
-            y+=10;
-        }
-        if (keyH.bulletDown) {
-            y-=10;
-        }
-        if (keyH.bulletLeft) {
-            x-=10;
-        }
-        if (keyH.bulletRight) {
-            x+=10;
-        }
+    public void update() {
+        x += dir.getDeltaX() * 5;
+        y += dir.getDeltaY() * 5;
     }
-
 }

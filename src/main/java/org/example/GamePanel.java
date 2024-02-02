@@ -1,9 +1,11 @@
 package org.example;
 
+import org.example.entity.Direction;
 import org.example.entity.Enemy;
 import org.example.entity.PlayerOne;
 import org.example.entity.PlayerTwo;
 import org.example.entity.Projectiles.Bullet;
+import org.example.entity.Projectiles.Projectiles;
 import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 
@@ -32,6 +34,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Enemy Array
     ArrayList<Enemy> enemyList = new ArrayList<>();
+
+    ArrayList<Projectiles> projectileList = new ArrayList<>();
+    ArrayList<Projectiles> projectilesToRemove = new ArrayList<>();
 
 
     // FPS
@@ -117,6 +122,25 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+        if (keyH.spawnBullet) {
+            Bullet bullet = new Bullet(playerOne.x, playerOne.y, Direction.fromBooleans(
+                    keyH.wPressed,
+                    keyH.dPressed,
+                    keyH.sPressed,
+                    keyH.aPressed
+            ));
+            projectileList.add(bullet);
+            keyH.spawnBullet = false;
+        }
+
+        for (Projectiles p: projectileList) {
+            if (p.x > 768 || p.x < 0 || p.y > 576 || p.y < 0) {
+                projectilesToRemove.add(p);
+            }
+            p.update();
+        }
+        projectileList.removeAll(projectilesToRemove);
+        projectilesToRemove.clear();
 
         if (onePlayerSelected || twoPlayerSelected) {
             playerOne.update();
@@ -188,11 +212,6 @@ public class GamePanel extends JPanel implements Runnable {
                 playerTwo.draw(g2, tileSize);
             }
 
-            if (keyH.shootBullet) {
-                Bullet bullet = new Bullet(keyH, playerOne.x, playerOne.y);
-                bullet.draw(g2);
-            }
-
             for (Powerup powerup : powerUpList) {
                 powerup.draw(g2);
             }
@@ -201,6 +220,11 @@ public class GamePanel extends JPanel implements Runnable {
             for (Enemy e : enemyList) {
                 e.draw(g2, tileSize);
             }
+
+            for (Projectiles p : projectileList) {
+                p.draw(g2);
+            }
+
 
         }
         g2.dispose();

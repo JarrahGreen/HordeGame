@@ -12,8 +12,7 @@ public abstract class Powerup extends Entity {
     Color color;
 
     Powerup(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     public void collect(PlayerOne player) {}

@@ -11,16 +11,12 @@ public class PlayerTwo extends Entity{
     KeyHandler keyH;
 
     public PlayerTwo(KeyHandler keyH) {
+        super(200, 200);
         this.keyH = keyH;
-        setDefaultValues();
+        this.speed = 2;
         getPlayerImage();
     }
 
-    public void setDefaultValues() {
-        x = 200;
-        y = 200;
-        speed = 2;
-    }
 
     public void setSpeed(int speed) {
         this.speed = speed;
