@@ -21,6 +21,6 @@ public abstract class Powerup extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.setColor(color);
-        g2.fillOval(x, y, radius, radius);
+        g2.fillOval((int) x, (int) y, radius, radius);
     }
 }

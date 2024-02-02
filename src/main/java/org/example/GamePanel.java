@@ -57,6 +57,14 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        try {
+            background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Background.png")));
+            title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
+            title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_2p.png")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -109,9 +117,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
+
         if (onePlayerSelected || twoPlayerSelected) {
             playerOne.update();
-            playerTwo.update();
+            if (twoPlayerSelected) {
+                playerTwo.update();
+            }
+
 
 
             // Change the Enemy's x and y location
@@ -150,14 +162,6 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        try {
-            background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Background.png")));
-            title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
-            title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_2p.png")));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         if (keyH.hoveringOnePlayer) {
             g.drawImage(title1p, 0, 0, null);
         }
@@ -177,7 +181,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-        if (onePlayerSelected) {
+        if (onePlayerSelected || twoPlayerSelected) {
             g.drawImage(background, 0, 0, null);
             playerOne.draw(g2, tileSize);
             if (twoPlayerSelected) {

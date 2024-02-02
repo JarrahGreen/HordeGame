@@ -11,33 +11,23 @@ public class Enemy extends Entity{
     public Enemy(int x, int y) {
         this.x = x;
         this.y = y;
-        setDefaultValues();
+        this.speed = 2;
         getEnemyImage();
 
     }
 
-
-    public void setDefaultValues() {
-        speed = 1;
-    }
-
-
-    public void updateValues(int playerX, int playerY) {
+    public void updateValues(double playerX, double playerY) {
 
         if (!hit) {
-            int diffX = x - playerX;
-            int diffY = y - playerY;
-            int total = diffX + diffY;
-            double totalX = (double) diffX /total;
-            double totalY = (double) diffY /total;
+            double diffX = playerX - x;
+            double diffY = playerY - y;
 
-            double test1 = (x-= totalX);
-            double test2 = (y-= totalY);
+            double angle = Math.atan2(diffY, diffX);
 
-            if (test1 == 0 && test2 == 0) {
-                System.out.println("hit");
-                hit = true;
-            }
+            double diffX2 = Math.cos(angle) * speed;
+            double diffY2 = Math.sin(angle) * speed;
+            x += (int) diffX2;
+            y += (int) diffY2;
         }
     }
 
@@ -53,7 +43,7 @@ public class Enemy extends Entity{
 
     public void draw(Graphics2D g2, int tileSize){
         BufferedImage image = this.image;
-        g2.drawImage(image, x, y, tileSize, tileSize, null);
+        g2.drawImage(image, (int) x, (int) y, tileSize, tileSize, null);
     }
 
 }

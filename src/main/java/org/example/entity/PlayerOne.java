@@ -24,11 +24,11 @@ public class PlayerOne extends Entity{
         speed = 2;
     }
 
-    public int getX(int x) {
+    public double getX(double x) {
         return x;
     }
 
-    public int getY(int y) {
+    public double getY(double y) {
         return y;
     }
 
@@ -65,8 +65,6 @@ public class PlayerOne extends Entity{
 
     public void draw(Graphics2D g2, int tileSize){
         BufferedImage image = this.image;
-        g2.drawImage(image, x, y, tileSize, tileSize, null);
-        getY(y);
-        getX(x);
+        g2.drawImage(image, (int) x, (int) y, tileSize, tileSize, null);
     }
 }

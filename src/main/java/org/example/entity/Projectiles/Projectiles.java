@@ -10,7 +10,7 @@ public class Projectiles extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.setColor(color);
-        g2.fillOval((x + 20), (y + 20), radius, radius);
+        g2.fillOval((int)(x + 20), (int)(y + 20), radius, radius);
     }
 
 

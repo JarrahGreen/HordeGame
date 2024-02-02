@@ -54,6 +54,6 @@ public class PlayerTwo extends Entity{
 
     public void draw(Graphics2D g2, int tileSize){
         BufferedImage image = this.image;
-        g2.drawImage(image, x, y, tileSize, tileSize, null);
+        g2.drawImage(image, (int) x, (int) y, tileSize, tileSize, null);
     }
 }

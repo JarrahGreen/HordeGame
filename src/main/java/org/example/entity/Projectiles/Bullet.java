@@ -9,7 +9,7 @@ public class Bullet extends Projectiles{
 
     KeyHandler keyH;
 
-    public Bullet(KeyHandler keyH, int x, int y) {
+    public Bullet(KeyHandler keyH, double x, double y) {
         this.keyH = keyH;
         shoot();
         this.x = x;
