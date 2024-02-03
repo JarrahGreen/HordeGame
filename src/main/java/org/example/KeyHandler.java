@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
+
     public boolean
             wPressed = false, sPressed = false, aPressed = false, dPressed = false,
             onePlayer = false, twoPlayer = false,
@@ -70,10 +71,11 @@ public class KeyHandler implements KeyListener {
         }
         if (code == KeyEvent.VK_RIGHT) {
             rightPressed = true;
-        }
 
+        }
         if (code == KeyEvent.VK_SPACE) {
             spawnBullet = true;
+
         }
     }
 
@@ -81,6 +83,7 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
 
         int code = e.getKeyCode();
+
 
         if (code == KeyEvent.VK_W) {
             wPressed = false;
@@ -109,9 +112,8 @@ public class KeyHandler implements KeyListener {
             rightPressed = false;
         }
 
-        if (code == KeyEvent.VK_SPACE) {
+        if (code == KeyEvent.VK_SPACE ) {
             spawnBullet = false;
         }
-
     }
 }

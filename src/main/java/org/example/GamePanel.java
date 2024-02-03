@@ -134,7 +134,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         for (Projectiles p: projectileList) {
-            if (p.x > 768 || p.x < 0 || p.y > 576 || p.y < 0) {
+            if (p.x > 768 || p.x < -20 || p.y > 576 || p.y < -20) {
                 projectilesToRemove.add(p);
             }
             p.update();

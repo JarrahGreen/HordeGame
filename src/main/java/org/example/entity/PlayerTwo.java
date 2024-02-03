@@ -33,16 +33,16 @@ public class PlayerTwo extends Entity{
 
     public void update() {
 
-        if(keyH.upPressed) {
+        if(keyH.upPressed && y > 0) {
             y -= speed;
         }
-        if(keyH.downPressed) {
+        if(keyH.downPressed && y < 528) {
             y += speed;
         }
-        if(keyH.leftPressed) {
+        if(keyH.leftPressed && x > 0) {
             x -= speed;
         }
-        if(keyH.rightPressed) {
+        if(keyH.rightPressed && x < 720) {
             x += speed;
         }
     }

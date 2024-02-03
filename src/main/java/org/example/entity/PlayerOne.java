@@ -1,6 +1,5 @@
 package org.example.entity;
 import org.example.KeyHandler;
-import org.example.entity.Projectiles.Bullet;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,15 +16,6 @@ public class PlayerOne extends Entity{
         this.keyH = keyH;
         this.speed = 2;
         getPlayerImage();
-    }
-
-
-    public double getX(double x) {
-        return x;
-    }
-
-    public double getY(double y) {
-        return y;
     }
 
     public void setSpeed(int speed) {
