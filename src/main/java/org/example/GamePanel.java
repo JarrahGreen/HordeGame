@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.entity.Entity;
 import org.example.entity.Direction;
 import org.example.entity.Enemy;
 import org.example.entity.PlayerOne;
@@ -231,14 +232,24 @@ public class GamePanel extends JPanel implements Runnable {
                 p.draw(g2);
             }
 
-            gameOver = true;
+            // Todo this probably doesnt work
+
+            /*
+            if (Entity.hit) {
+                gameOver = false;
+            }
+
+             */
 
         }
+        /*
         if (gameOver) {
 
             g.drawImage(gameOver1, 0, 0, null);
         }
 
+
+         */
 
         g2.dispose();
     }
