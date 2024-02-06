@@ -53,6 +53,9 @@ public class GamePanel extends JPanel implements Runnable {
     public BufferedImage background;
     public BufferedImage title1p;
     public BufferedImage title2p;
+    public BufferedImage gameOver1;
+    public BufferedImage gameOver2;
+    boolean gameOver = false;
 
     // Power Up
     ArrayList<Powerup> powerUpList = new ArrayList<>();
@@ -67,10 +70,13 @@ public class GamePanel extends JPanel implements Runnable {
             background = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Background.png")));
             title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
             title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_2p.png")));
+            gameOver1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/GameOver_1.png")));
+            gameOver2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/GameOver_2.png")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 
     public void startGameThread() {
@@ -205,7 +211,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
 
-        if (onePlayerSelected || twoPlayerSelected) {
+        if (onePlayerSelected || twoPlayerSelected && !gameOver) {
             g.drawImage(background, 0, 0, null);
             playerOne.draw(g2, tileSize);
             if (twoPlayerSelected) {
@@ -225,8 +231,15 @@ public class GamePanel extends JPanel implements Runnable {
                 p.draw(g2);
             }
 
+            gameOver = true;
 
         }
+        if (gameOver) {
+
+            g.drawImage(gameOver1, 0, 0, null);
+        }
+
+
         g2.dispose();
     }
 }
