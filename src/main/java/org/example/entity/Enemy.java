@@ -1,6 +1,4 @@
 package org.example.entity;
-import  org.example.entity.PlayerOne;
-import org.w3c.dom.css.Rect;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,7 +18,7 @@ public class Enemy extends Entity{
 
     public void updateValues(double playerX, double playerY) {
 
-        if (!hit) {
+        if (false) {
             double diffX = playerX - x;
             double diffY = playerY - y;
 
@@ -46,18 +44,10 @@ public class Enemy extends Entity{
     public void draw(Graphics2D g2, int tileSize){
         BufferedImage image = this.image;
         g2.drawImage(image, (int) x, (int) y, tileSize, tileSize, null);
-        Rectangle rectangle = new Rectangle(5,10,20,30);
-
-        // todo This doesn't work
-        /*
-        if (g2.hit(rectangle, rectangle, false)) {
-            hit = true;
         }
-
-         */
     }
 
-}
+
 
 
 
