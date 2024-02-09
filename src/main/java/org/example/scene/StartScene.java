@@ -19,13 +19,6 @@ public class StartScene extends Scene {
 
     private BufferedImage currentBackground;
 
-    KeyHandler keyH;
-    PlayerOne playerOne;
-    PlayerTwo playerTwo;
-    GamePanel gamePanel;
-
-
-    // todo I think this is wrong
     public StartScene() {
         try {
             title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
@@ -52,9 +45,6 @@ public class StartScene extends Scene {
             case KeyEvent.VK_UP: {
                 currentBackground = title1p;
                 break;
-            }
-            case KeyEvent.VK_ENTER: {
-                SceneManager.getSceneManager().setActiveScene(new GameScene(keyH, playerOne, playerTwo, gamePanel));
             }
         }
     }

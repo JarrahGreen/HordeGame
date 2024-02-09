@@ -22,7 +22,6 @@ public class SceneManager implements KeyListener {
         return _instance;
     }
 
-    // Todo Never used
     public Scene getActiveScene() {
         return activeScene;
     }

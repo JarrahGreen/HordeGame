@@ -61,11 +61,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         sceneManager.update();
+
     }
 
-
-    // Todo THis is never used
-    public void paintComponent(Graphics2D g2) {
+    public void paint(Graphics2D g2) {
+        System.out.println("draw");
         super.paintComponent(g2);
         sceneManager.draw(g2);
     }
