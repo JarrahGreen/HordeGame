@@ -30,12 +30,12 @@ public class SceneManager implements KeyListener {
         this.activeScene = activeScene;
     }
 
-    public void update() {
-        activeScene.update();
+    public void update(double dt) {
+        activeScene.update(dt);
     }
 
-    public void draw(Graphics2D g2) {
-        activeScene.draw(g2);
+    public void draw(Graphics g) {
+        activeScene.draw(g);
     }
 
     @Override

@@ -2,25 +2,27 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
+import java.util.ConcurrentModificationException;
 
 
 public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
-    final int originalTileSize = 16; // 16 * 16
-    final int scale = 3;
-    public final int tileSize = originalTileSize * scale;  // 48 * 48 tile
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize * maxScreenCol; // 768 px
-    final int screenHeight = tileSize * maxScreenRow; // 576 px
+    final static int originalTileSize = 16; // 16 * 16
+    final static int scale = 3;
+    public static final int tileSize = originalTileSize * scale;  // 48 * 48 tile
+    final static int maxScreenCol = 16;
+    final static int maxScreenRow = 12;
+    public final static int screenWidth = tileSize * maxScreenCol; // 768 px
+    public final static int screenHeight = tileSize * maxScreenRow; // 576 px
 
     // Key handler and Game thread
     Thread gameThread;
 
     // FPS
-    int FPS = 60;
+    final static int FPS = 60;
 
     private final SceneManager sceneManager;
 
@@ -52,21 +54,20 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();
+                update(delta);
                 repaint();
                 delta--;
             }
         }
     }
 
-    public void update() {
-        sceneManager.update();
+    public void update(double dt) {
+        sceneManager.update(dt);
 
     }
 
-    public void paint(Graphics2D g2) {
-        System.out.println("draw");
-        super.paintComponent(g2);
-        sceneManager.draw(g2);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        sceneManager.draw(g);
     }
 }

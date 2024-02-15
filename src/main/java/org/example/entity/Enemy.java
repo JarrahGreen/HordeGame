@@ -1,34 +1,47 @@
 package org.example.entity;
 
+import org.example.GamePanel;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 
 public class Enemy extends Entity{
 
     public Enemy(int x, int y) {
-        super(x, y);
+        super(x, y, GamePanel.tileSize, GamePanel.tileSize);
         this.speed = 2;
         getEnemyImage();
-
     }
 
-    public void updateValues(double playerX, double playerY) {
-
-        if (false) {
-            double diffX = playerX - x;
-            double diffY = playerY - y;
-
-            double angle = Math.atan2(diffY, diffX);
-
-            double diffX2 = Math.cos(angle) * speed;
-            double diffY2 = Math.sin(angle) * speed;
-            x += (int) diffX2;
-            y += (int) diffY2;
+    public void updateValues(ArrayList<Player> playerList) {
+        double minDistanceSoFar = Double.POSITIVE_INFINITY;
+        Optional<Double> diffX = Optional.empty();
+        Optional<Double> diffY = Optional.empty();
+        for (Player p : playerList) {
+            double dx = p.x - x;
+            double dy = p.y - y;
+            double dist = Math.abs(dx) + Math.abs(dy);
+            if (dist < minDistanceSoFar) {
+                minDistanceSoFar = dist;
+                diffX = Optional.of(dx);
+                diffY = Optional.of(dy);
+            }
         }
+
+        if (minDistanceSoFar < speed) { return; }
+
+        double angle = Math.atan2(diffY.orElseThrow(), diffX.orElseThrow());
+
+        double diffX2 = Math.cos(angle) * speed;
+        double diffY2 = Math.sin(angle) * speed;
+        x += (int) diffX2;
+        y += (int) diffY2;
     }
 
     public void getEnemyImage() {
@@ -41,11 +54,11 @@ public class Enemy extends Entity{
     }
 
 
-    public void draw(Graphics2D g2, int tileSize){
-        BufferedImage image = this.image;
-        g2.drawImage(image, (int) x, (int) y, tileSize, tileSize, null);
-        }
+    @Override
+    public void draw(Graphics g) {
+        g.drawImage(image, (int) x, (int) y, width, height, null);
     }
+}
 
 
 

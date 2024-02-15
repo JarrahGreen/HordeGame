@@ -33,7 +33,7 @@ public enum Direction {
             } else if (left) {
                 return LEFT;
             } else {
-                return RIGHT;
+                return UP;
             }
         }
     }

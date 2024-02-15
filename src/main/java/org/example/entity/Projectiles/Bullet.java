@@ -9,7 +9,7 @@ public class Bullet extends Projectiles{
     }
 
     public void update() {
-        x += dir.getDeltaX() * 5;
-        y += dir.getDeltaY() * 5;
+        x += dir.getDeltaX() * 10;
+        y += dir.getDeltaY() * 10;
     }
 }

@@ -1,25 +1,24 @@
 package org.example.entity.powerup;
 
 import org.example.entity.Entity;
-import org.example.entity.PlayerOne;
-import org.example.entity.PlayerTwo;
+import org.example.entity.Player;
 
 import java.awt.*;
 
 public abstract class Powerup extends Entity {
-    public final int radius = 35;
+     public static final int diameter = 35;
 
     Color color;
 
     Powerup(int x, int y) {
-        super(x, y);
+        super(x, y, diameter, diameter);
     }
 
-    public void collect(PlayerOne player) {}
-    public void collect(PlayerTwo player) {}
 
-    public void draw(Graphics2D g2) {
-        g2.setColor(color);
-        g2.fillOval((int) x, (int) y, radius, radius);
+    public abstract void collect(Entity e);
+
+    public void draw(Graphics g) {
+        g.setColor(color);
+        g.fillOval((int) x, (int) y, diameter, diameter);
     }
 }

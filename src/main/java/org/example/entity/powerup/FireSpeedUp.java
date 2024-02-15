@@ -5,14 +5,16 @@ import org.example.entity.Player;
 
 import java.awt.*;
 
-public class SpeedBoost extends Powerup {
-    public SpeedBoost(int x, int y) {
+public class FireSpeedUp extends Powerup {
+    public FireSpeedUp(int x, int y) {
         super(x, y);
-        color = Color.BLUE;
+        color = Color.PINK;
     }
 
     @Override
     public void collect(Entity e) {
-        e.speed += 1;
+        if (e instanceof Player) {
+            ((Player) e).maxCooldown -= 2;
+        }
     }
 }

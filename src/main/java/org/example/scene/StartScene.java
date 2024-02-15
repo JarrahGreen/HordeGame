@@ -1,10 +1,6 @@
 package org.example.scene;
 
-import org.example.GamePanel;
-import org.example.KeyHandler;
 import org.example.SceneManager;
-import org.example.entity.PlayerOne;
-import org.example.entity.PlayerTwo;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -45,6 +41,13 @@ public class StartScene extends Scene {
             case KeyEvent.VK_UP: {
                 currentBackground = title1p;
                 break;
+            }
+            case KeyEvent.VK_ENTER: {
+                int numPlayers = 1;
+                if (currentBackground == title2p) {
+                    numPlayers = 2;
+                }
+                SceneManager.getSceneManager().setActiveScene(new GameScene(numPlayers));
             }
         }
     }

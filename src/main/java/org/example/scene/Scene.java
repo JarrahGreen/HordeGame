@@ -9,9 +9,9 @@ import java.awt.event.KeyEvent;
 public class Scene extends JComponent {
     protected Scene(){}
 
-    public void update() {}
+    public void update(double dt) {}
 
-    public void draw(Graphics2D g2) {}
+    public void draw(Graphics g) {}
 
     public void keyTyped(KeyEvent e) {}
 
