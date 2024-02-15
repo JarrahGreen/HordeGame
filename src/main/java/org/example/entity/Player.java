@@ -13,7 +13,7 @@ public class Player extends Entity{
     public final PlayerController controls;
     private boolean didShoot;
     private double cooldown;
-    public int maxCooldown = 0;
+    public int maxCooldown = 30;
 
     public Player(int x, int y, PlayerController controls, String pathToImage) {
         super(x, y, GamePanel.tileSize, GamePanel.tileSize);
