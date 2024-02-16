@@ -27,8 +27,10 @@ public class GameScene extends Scene {
     ArrayList<Projectiles> projectileList = new ArrayList<>();
     ArrayList<Projectiles> projectilesToRemove = new ArrayList<>();
     ArrayList<Powerup> powerUpList = new ArrayList<>();
-    ArrayList<Powerup> powerupsToRemove = new ArrayList<>();
+    ArrayList<Powerup> powerUpsToRemove = new ArrayList<>();
     ArrayList<Player> players = new ArrayList<>();
+
+    public static boolean isHell = false;
 
     public int enemySpawnRate;
     public int score;
@@ -55,7 +57,7 @@ public class GameScene extends Scene {
                 "/PlayerOne.png",
                 "/PlayerTwo.png",
         };
-        enemySpawnRate = 100;
+        enemySpawnRate = 200;
         int px = 100;
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(px, 100, pControllers[i], pImages[i]));
@@ -80,12 +82,7 @@ public class GameScene extends Scene {
             if (p.didShoot()) {
                 projectileList.add(new Bullet(
                         p.x + (double) p.width / 2, p.y + (double) p.height / 2,
-                        Direction.fromBooleans(
-                                heldKeys.contains(p.controls.up()),
-                                heldKeys.contains(p.controls.right()),
-                                heldKeys.contains(p.controls.down()),
-                                heldKeys.contains(p.controls.left())
-                        )
+                        p.lastDirection, p
                 ));
             }
         }
@@ -105,11 +102,11 @@ public class GameScene extends Scene {
             ));
         }
 
-        if (enemySpawnRate <= 0) {
+        if (enemySpawnRate <= 1) {
             SceneManager.getSceneManager().setActiveScene(new EndScene(true));
         }
         if (rng.nextInt(enemySpawnRate) == 0) {
-             enemySpawnRate--;
+            if (enemySpawnRate > 20) { enemySpawnRate--; }
             int primaryAxis;
             int secondaryAxis;
             boolean flip = rng.nextBoolean();
@@ -132,7 +129,7 @@ public class GameScene extends Scene {
         }
 
         for (Projectiles p: projectileList) {
-            if (p.x > 768 || p.x < -20 || p.y > 576 || p.y < -20) {
+            if (p.x > GamePanel.screenWidth || p.x < -20 || p.y > GamePanel.screenHeight || p.y < -20) {
                 projectilesToRemove.add(p);
             }
             for (Enemy e: enemyList) {
@@ -140,6 +137,10 @@ public class GameScene extends Scene {
                     score++;
                     enemiesToRemove.add(e);
                     projectilesToRemove.add(p);
+                    if (isHell) {
+                        Player pl = ((Player) p.source);
+                        pl.controls = pl.controls.randomise();
+                    }
                 }
             }
             enemyList.removeAll(enemiesToRemove);
@@ -165,11 +166,11 @@ public class GameScene extends Scene {
         for (Powerup p : powerUpList) {
             if (p.collidesWith(e)) {
                 p.collect(e);
-                powerupsToRemove.add(p);
+                powerUpsToRemove.add(p);
             }
         }
-        powerUpList.removeAll(powerupsToRemove);
-        powerupsToRemove.clear();
+        powerUpList.removeAll(powerUpsToRemove);
+        powerUpsToRemove.clear();
     }
 
 

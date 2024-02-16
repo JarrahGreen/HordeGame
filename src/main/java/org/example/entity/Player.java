@@ -10,10 +10,11 @@ import java.util.Set;
 
 
 public class Player extends Entity{
-    public final PlayerController controls;
+    public PlayerController controls;
     private boolean didShoot;
     private double coolDown;
     public int maxCoolDown = 30;
+    public Direction lastDirection;
 
     public Player(int x, int y, PlayerController controls, String pathToImage) {
         super(x, y, GamePanel.tileSize, GamePanel.tileSize);
@@ -25,6 +26,7 @@ public class Player extends Entity{
         }catch(IOException e) {
             throw new RuntimeException(e);
         }
+        lastDirection = Direction.UP;
     }
 
     public boolean didShoot() {
@@ -46,17 +48,24 @@ public class Player extends Entity{
     }
 
     public void move(Set<Integer> heldKeys, double dt) {
-        if (heldKeys.contains(controls.up())) {
+        boolean isUp = heldKeys.contains(controls.up());
+        boolean isRight = heldKeys.contains(controls.right());
+        boolean isDown = heldKeys.contains(controls.down());
+        boolean isLeft = heldKeys.contains(controls.left());
+        if (isUp) {
             y -= speed * dt;
         }
-        if (heldKeys.contains(controls.right())) {
+        if (isRight) {
             x += speed * dt;
         }
-        if (heldKeys.contains(controls.down())) {
+        if (isDown) {
             y += speed * dt;
         }
-        if (heldKeys.contains(controls.left())) {
+        if (isLeft) {
             x -= speed * dt;
+        }
+        if (isUp || isRight || isDown || isLeft) {
+            lastDirection = Direction.fromBooleans(isUp, isRight, isDown, isLeft);
         }
         if (heldKeys.contains(controls.shoot())) {
             if (coolDown <= 0) {
