@@ -14,7 +14,7 @@ public class FireSpeedUp extends Powerup {
     @Override
     public void collect(Entity e) {
         if (e instanceof Player) {
-            ((Player) e).maxCooldown -= 2;
+            ((Player) e).maxCoolDown -= 2;
         }
     }
 }

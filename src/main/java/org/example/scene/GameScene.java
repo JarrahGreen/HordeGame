@@ -31,6 +31,7 @@ public class GameScene extends Scene {
     ArrayList<Player> players = new ArrayList<>();
 
     public int enemySpawnRate;
+    public int score;
 
     public GameScene(int numPlayers) {
         heldKeys = new HashSet<>();
@@ -104,7 +105,7 @@ public class GameScene extends Scene {
             ));
         }
 
-        if (enemySpawnRate >= 0) {
+        if (enemySpawnRate <= 0) {
             SceneManager.getSceneManager().setActiveScene(new EndScene(true));
         }
         if (rng.nextInt(enemySpawnRate) == 0) {
@@ -130,22 +131,13 @@ public class GameScene extends Scene {
             enemyList.add(e);
         }
 
-        /*
-        boolean didHit = false;
-        for(Enemy e: enemyList) {
-            didHit = playerOne.hit(e);
-            if(didHit) {
-                SceneManager.getSceneManager().setActiveScene();
-            }
-        }
-        */
-
         for (Projectiles p: projectileList) {
             if (p.x > 768 || p.x < -20 || p.y > 576 || p.y < -20) {
                 projectilesToRemove.add(p);
             }
             for (Enemy e: enemyList) {
                 if (e.collidesWith(p)) {
+                    score++;
                     enemiesToRemove.add(e);
                     projectilesToRemove.add(p);
                 }
@@ -186,6 +178,7 @@ public class GameScene extends Scene {
     public void draw(Graphics g) {
         g.drawImage(background, 0, 0, null);
 
+
         for (Player p: players) {
             p.draw(g);
         }
@@ -201,6 +194,9 @@ public class GameScene extends Scene {
         for (Projectiles p : projectileList) {
             p.draw(g);
         }
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
+        g.drawString(String.valueOf(score), 5,75);
     }
 
 

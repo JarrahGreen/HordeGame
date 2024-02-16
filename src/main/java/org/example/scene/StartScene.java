@@ -27,7 +27,6 @@ public class StartScene extends Scene {
 
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        g.drawOval(10, 10, 100, 100);
         g2.drawImage(currentBackground, 0, 0, null);
     }
 

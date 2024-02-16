@@ -12,8 +12,8 @@ import java.util.Set;
 public class Player extends Entity{
     public final PlayerController controls;
     private boolean didShoot;
-    private double cooldown;
-    public int maxCooldown = 30;
+    private double coolDown;
+    public int maxCoolDown = 30;
 
     public Player(int x, int y, PlayerController controls, String pathToImage) {
         super(x, y, GamePanel.tileSize, GamePanel.tileSize);
@@ -40,8 +40,8 @@ public class Player extends Entity{
     @Override
     public void update(double dt) {
         super.update(dt);
-        if (cooldown > 0) {
-            cooldown -= dt;
+        if (coolDown > 0) {
+            coolDown -= dt;
         }
     }
 
@@ -59,9 +59,9 @@ public class Player extends Entity{
             x -= speed * dt;
         }
         if (heldKeys.contains(controls.shoot())) {
-            if (cooldown <= 0) {
+            if (coolDown <= 0) {
                 didShoot = true;
-                cooldown = maxCooldown;
+                coolDown = maxCoolDown;
             }
         }
     }
