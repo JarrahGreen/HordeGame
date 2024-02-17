@@ -1,7 +1,6 @@
 package org.example.entity.powerup;
 
 import org.example.entity.Entity;
-import org.example.entity.Player;
 
 import java.awt.*;
 

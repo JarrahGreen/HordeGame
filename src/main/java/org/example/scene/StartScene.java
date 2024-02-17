@@ -1,6 +1,4 @@
 package org.example.scene;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import org.example.SceneManager;
 
 import javax.imageio.ImageIO;
@@ -8,7 +6,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class StartScene extends Scene {
@@ -43,12 +40,17 @@ public class StartScene extends Scene {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN: {
-                i+=1;
+                if (i < 2) {
+                    i += 1;
+                }
                 currentBackground = backgrounds[i];
                 break;
             }
             case KeyEvent.VK_UP: {
-                i-=1;
+                // todo test this
+                if (i > 0) {
+                    i-=1; 
+                }
                 currentBackground = backgrounds[i];
                 break;
             }
@@ -63,9 +65,11 @@ public class StartScene extends Scene {
                 }
                 // todo settings screen
 
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    GameScene.isHell = true;
-                    System.out.println("Hell mode activated");
+                if (currentBackground == settings) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        GameScene.isHell = true;
+                        System.out.println("Hell mode activated");
+                    }
                 }
             }
         }

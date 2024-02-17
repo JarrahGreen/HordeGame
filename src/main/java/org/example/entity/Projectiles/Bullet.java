@@ -1,7 +1,6 @@
 package org.example.entity.Projectiles;
 import org.example.entity.Direction;
 import org.example.entity.Entity;
-import org.example.entity.Player;
 
 public class Bullet extends Projectiles{
     private final Direction dir;

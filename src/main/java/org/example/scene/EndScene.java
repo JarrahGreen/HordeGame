@@ -1,13 +1,16 @@
 package org.example.scene;
 
+import org.example.SceneManager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
 public class EndScene extends Scene {
-    final BufferedImage won, lost;
+    final public BufferedImage won, lost;
     private final BufferedImage currentBackground;
     public EndScene(boolean didWin) {
 
@@ -25,9 +28,18 @@ public class EndScene extends Scene {
             currentBackground = lost;
         }
 
-
-
     }
+
+    public void keyPressed(KeyEvent e) {
+        if (currentBackground == won || currentBackground == lost) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                SceneManager.getSceneManager().setActiveScene(new StartScene());
+
+
+            }
+        }
+    }
+
 
 
     public void draw(Graphics g) {

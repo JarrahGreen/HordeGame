@@ -34,8 +34,4 @@ public abstract class Entity {
 
     public abstract void draw(Graphics g);
 
-    public boolean hit(Entity enemyRectangle) {
-        return false;
-    }
-
 }

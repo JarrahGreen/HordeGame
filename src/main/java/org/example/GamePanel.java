@@ -2,9 +2,6 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
-import java.util.ConcurrentModificationException;
 
 
 public class GamePanel extends JPanel implements Runnable {

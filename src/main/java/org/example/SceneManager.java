@@ -22,10 +22,6 @@ public class SceneManager implements KeyListener {
         return _instance;
     }
 
-    public Scene getActiveScene() {
-        return activeScene;
-    }
-
     public void setActiveScene(Scene activeScene) {
         this.activeScene = activeScene;
     }
