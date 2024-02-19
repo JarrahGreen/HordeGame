@@ -23,6 +23,16 @@ public class GameScene extends Scene {
     private final Set<Integer> heldKeys;
     private final Random rng;
 
+
+    public static boolean pickedUpMachineGun = false;
+    public static boolean holdingMachineGun = false;
+    public static long startPickedUpMachineGun;
+    public static long endPickedUpMachineGun;
+
+    int machineGunSpawnRate = 2000;
+    int fireSpeedUpSpawnRate = 1000;
+    int speedBoostSpawnRate = 1000;
+
     ArrayList<Enemy> enemyList = new ArrayList<>();
     ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
     ArrayList<Projectiles> projectileList = new ArrayList<>();
@@ -89,21 +99,21 @@ public class GameScene extends Scene {
         }
 
 
-        if (rng.nextInt(1000) == 0) {
+        if (rng.nextInt(speedBoostSpawnRate) == 0) {
             powerUpList.add(new SpeedBoost(
                     rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
                     rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
             ));
         }
 
-        if (rng.nextInt(1000) == 0) {
+        if (rng.nextInt(fireSpeedUpSpawnRate) == 0) {
             powerUpList.add(new FireSpeedUp(
                     rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
                     rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
             ));
         }
 
-        if (rng.nextInt(2000) == 0) {
+        if (rng.nextInt(machineGunSpawnRate) == 0) {
             powerUpList.add(new MachineGun(
                     rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
                     rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
@@ -158,7 +168,6 @@ public class GameScene extends Scene {
         projectileList.removeAll(projectilesToRemove);
         projectilesToRemove.clear();
 
-        // Change the Enemy's x and y location
         for (Enemy e : enemyList) {
             for (Player p: players) {
                 if (e.collidesWith(p)) {
@@ -175,11 +184,30 @@ public class GameScene extends Scene {
         for (Powerup p : powerUpList) {
             if (p.collidesWith(e)) {
                 p.collect(e);
+                if (p instanceof MachineGun) {
+                    pickedUpMachineGun = true;
+                }
                 powerUpsToRemove.add(p);
             }
         }
         powerUpList.removeAll(powerUpsToRemove);
         powerUpsToRemove.clear();
+
+
+        if (pickedUpMachineGun) {
+            startPickedUpMachineGun = System.currentTimeMillis();
+            pickedUpMachineGun = false;
+            holdingMachineGun = true;
+        }
+
+        // Check if the Machine gun has been help for 5 Seconds
+        if (holdingMachineGun) {
+            endPickedUpMachineGun = System.currentTimeMillis();
+
+            if (endPickedUpMachineGun - startPickedUpMachineGun > 5000) {
+                Entity.maxCoolDown = 30;
+            }
+        }
     }
 
 

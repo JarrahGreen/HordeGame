@@ -13,7 +13,7 @@ public class MachineGun extends Powerup{
 
     @Override
     public void collect(Entity e) {
-        e.maxCoolDown -= 20;
+        maxCoolDown -= 30;
 
 
     }
