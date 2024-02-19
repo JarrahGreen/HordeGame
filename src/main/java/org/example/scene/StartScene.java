@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class StartScene extends Scene {
-    private final BufferedImage title1p;
     private final BufferedImage title2p;
     private final BufferedImage settings;
     BufferedImage[] backgrounds;
@@ -19,7 +18,7 @@ public class StartScene extends Scene {
 
     public StartScene() {
         try {
-            title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
+            BufferedImage title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
             title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_2p.png")));
             settings = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings.png")));
             backgrounds = new BufferedImage[]{title1p, title2p, settings};
@@ -27,6 +26,7 @@ public class StartScene extends Scene {
             throw new RuntimeException(e);
         }
         currentBackground = backgrounds[0];
+
 
     }
 
@@ -62,12 +62,14 @@ public class StartScene extends Scene {
                     SceneManager.getSceneManager().setActiveScene(new GameScene(numPlayers));
 
                 }
-                // todo settings screen
-
                 if (currentBackground == settings) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!GameScene.isHell) {
                         GameScene.isHell = true;
                         System.out.println("Hell mode activated");
+                    }
+                    else {
+                        GameScene.isHell = false;
+                        System.out.println("Hell mode de-activated");
                     }
                 }
             }

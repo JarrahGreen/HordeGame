@@ -1,6 +1,7 @@
 package org.example.scene;
 
 import org.example.SceneManager;
+import org.example.entity.Entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -33,6 +34,8 @@ public class EndScene extends Scene {
     public void keyPressed(KeyEvent e) {
         if (currentBackground == won || currentBackground == lost) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                Entity.maxCoolDown = 30;
+                GameScene.isHell = false;
                 SceneManager.getSceneManager().setActiveScene(new StartScene());
 
 

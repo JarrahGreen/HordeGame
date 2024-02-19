@@ -29,7 +29,7 @@ public class GameScene extends Scene {
     public static long startPickedUpMachineGun;
     public static long endPickedUpMachineGun;
 
-    int machineGunSpawnRate = 2000;
+    int machineGunSpawnRate = 500;
     int fireSpeedUpSpawnRate = 1000;
     int speedBoostSpawnRate = 1000;
 
@@ -45,6 +45,7 @@ public class GameScene extends Scene {
 
     public int enemySpawnRate;
     public int score;
+    public int winningScore = 100;
 
     public GameScene(int numPlayers) {
         heldKeys = new HashSet<>();
@@ -121,11 +122,11 @@ public class GameScene extends Scene {
         }
 
 
-        if (enemySpawnRate <= 1) {
+        if (score >= winningScore) {
             SceneManager.getSceneManager().setActiveScene(new EndScene(true));
         }
         if (rng.nextInt(enemySpawnRate) == 0) {
-            if (enemySpawnRate > 20) { enemySpawnRate--; }
+            enemySpawnRate--;
             int primaryAxis;
             int secondaryAxis;
             boolean flip = rng.nextBoolean();
@@ -205,7 +206,8 @@ public class GameScene extends Scene {
             endPickedUpMachineGun = System.currentTimeMillis();
 
             if (endPickedUpMachineGun - startPickedUpMachineGun > 5000) {
-                Entity.maxCoolDown = 30;
+                Entity.maxCoolDown += 30;
+                holdingMachineGun = false;
             }
         }
     }
