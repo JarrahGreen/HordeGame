@@ -13,7 +13,7 @@ public class Player extends Entity{
     public PlayerController controls;
     private boolean didShoot;
     private double coolDown;
-    public int maxCoolDown = 30;
+    // public int maxCoolDown = 30;
     public Direction lastDirection;
 
     public Player(int x, int y, PlayerController controls, String pathToImage) {

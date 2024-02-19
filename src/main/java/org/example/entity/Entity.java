@@ -12,6 +12,7 @@ public abstract class Entity {
     public BufferedImage image;
     public int width;
     public int height;
+    public int maxCoolDown = 30;
 
     public Entity(double x, double y, int width, int height) {
         this.x = x;

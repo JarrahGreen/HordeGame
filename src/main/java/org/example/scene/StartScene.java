@@ -47,7 +47,6 @@ public class StartScene extends Scene {
                 break;
             }
             case KeyEvent.VK_UP: {
-                // todo test this
                 if (i > 0) {
                     i-=1; 
                 }

@@ -12,6 +12,7 @@ import org.example.SceneManager;
 import org.example.entity.*;
 import org.example.entity.Projectiles.Bullet;
 import org.example.entity.powerup.FireSpeedUp;
+import org.example.entity.powerup.MachineGun;
 import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 import org.example.entity.Projectiles.Projectiles;
@@ -101,6 +102,14 @@ public class GameScene extends Scene {
                     rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
             ));
         }
+
+        if (rng.nextInt(2000) == 0) {
+            powerUpList.add(new MachineGun(
+                    rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
+                    rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
+            ));
+        }
+
 
         if (enemySpawnRate <= 1) {
             SceneManager.getSceneManager().setActiveScene(new EndScene(true));
