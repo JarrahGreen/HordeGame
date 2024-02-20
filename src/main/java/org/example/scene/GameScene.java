@@ -16,7 +16,7 @@ import org.example.entity.powerup.MachineGun;
 import org.example.entity.powerup.Powerup;
 import org.example.entity.powerup.SpeedBoost;
 import org.example.entity.Projectiles.Projectiles;
-
+import java.io.FileWriter;
 
 public class GameScene extends Scene {
     private final BufferedImage background;
@@ -45,6 +45,7 @@ public class GameScene extends Scene {
 
     public int enemySpawnRate;
     public int score;
+    public Integer money;
     public int winningScore = 100;
 
     public GameScene(int numPlayers) {
@@ -169,14 +170,27 @@ public class GameScene extends Scene {
         projectileList.removeAll(projectilesToRemove);
         projectilesToRemove.clear();
 
-        for (Enemy e : enemyList) {
+        for (Enemy a : enemyList) {
             for (Player p: players) {
-                if (e.collidesWith(p)) {
+                if (a.collidesWith(p)) {
+                    money = score;
+
+                    try {
+                        FileWriter myWriter = new FileWriter("Money");
+                        String toString = money.toString();
+                        myWriter.write(toString);
+
+                        myWriter.close();
+                    } catch (IOException e) {
+                        System.out.println("Fail in opening file");
+                    }
+
+
                     SceneManager.getSceneManager().setActiveScene(new EndScene(false));
                 }
             }
 
-            e.updateValues(players);
+            a.updateValues(players);
         }
     }
 

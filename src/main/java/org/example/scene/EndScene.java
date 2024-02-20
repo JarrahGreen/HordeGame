@@ -35,6 +35,7 @@ public class EndScene extends Scene {
         if (currentBackground == won || currentBackground == lost) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 Entity.maxCoolDown = 30;
+                System.out.println();
                 SceneManager.getSceneManager().setActiveScene(new StartScene());
 
 
