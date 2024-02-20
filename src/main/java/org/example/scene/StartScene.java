@@ -64,20 +64,18 @@ public class StartScene extends Scene {
                     SceneManager.getSceneManager().setActiveScene(new GameScene(numPlayers));
 
                 }
-                if (currentBackground == settings) {
-                    if (!GameScene.isHell) {
-                        GameScene.isHell = true;
-                        System.out.println("Hell mode activated");
-                    }
-                    else {
-                        GameScene.isHell = false;
-                        System.out.println("Hell mode de-activated");
-                    }
-                }
+
+                /*
                 if (currentBackground == shop) {
                     SceneManager.getSceneManager().setActiveScene(new ShopScene());
                 }
 
+                if (currentBackground == settings) {
+                    SceneManager.getSceneManager().setActiveScene(new SettingsScene());
+                }
+
+
+                 */
 
             }
         }
