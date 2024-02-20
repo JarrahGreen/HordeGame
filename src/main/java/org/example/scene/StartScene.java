@@ -18,10 +18,11 @@ public class StartScene extends Scene {
 
     public StartScene() {
         try {
-            BufferedImage title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_1p.png")));
-            title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_2p.png")));
-            settings = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings.png")));
-            backgrounds = new BufferedImage[]{title1p, title2p, settings};
+            BufferedImage title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-1.png")));
+            title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-2.png")));
+            BufferedImage shop = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-3")));
+            settings = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-4.png")));
+            backgrounds = new BufferedImage[]{title1p, title2p, shop, settings};
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +41,7 @@ public class StartScene extends Scene {
 
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN: {
-                if (i < 2) {
+                if (i < 3) {
                     i += 1;
                 }
                 currentBackground = backgrounds[i];

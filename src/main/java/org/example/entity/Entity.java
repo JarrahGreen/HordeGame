@@ -2,8 +2,10 @@ package org.example.entity;
 
 import org.example.GamePanel;
 
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 
 
 public abstract class Entity {
@@ -19,6 +21,7 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+
     }
 
     public void update(double dt) {
