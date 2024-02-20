@@ -11,6 +11,7 @@ import java.util.Objects;
 public class StartScene extends Scene {
     private final BufferedImage title2p;
     private final BufferedImage settings;
+    private final BufferedImage shop;
     BufferedImage[] backgrounds;
 
     int i = 0;
@@ -20,7 +21,7 @@ public class StartScene extends Scene {
         try {
             BufferedImage title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-1.png")));
             title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-2.png")));
-            BufferedImage shop = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-3")));
+            shop = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-3.png")));
             settings = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-4.png")));
             backgrounds = new BufferedImage[]{title1p, title2p, shop, settings};
         } catch (IOException e) {
@@ -55,7 +56,7 @@ public class StartScene extends Scene {
                 break;
             }
             case KeyEvent.VK_ENTER: {
-                if (currentBackground != settings) {
+                if (currentBackground != settings && currentBackground != shop) {
                     int numPlayers = 1;
                     if (currentBackground == title2p) {
                         numPlayers = 2;
@@ -73,6 +74,11 @@ public class StartScene extends Scene {
                         System.out.println("Hell mode de-activated");
                     }
                 }
+                if (currentBackground == shop) {
+                    System.out.println("Shop");
+                }
+
+
             }
         }
     }
