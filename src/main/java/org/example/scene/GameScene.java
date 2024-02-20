@@ -29,9 +29,9 @@ public class GameScene extends Scene {
     public static long startPickedUpMachineGun;
     public static long endPickedUpMachineGun;
 
-    int machineGunSpawnRate = 500;
-    int fireSpeedUpSpawnRate = 1000;
-    int speedBoostSpawnRate = 1000;
+    int machineGunSpawnRate = 4000;
+    int fireSpeedUpSpawnRate = 2000;
+    int speedBoostSpawnRate = 2000;
 
     ArrayList<Enemy> enemyList = new ArrayList<>();
     ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
@@ -177,7 +177,6 @@ public class GameScene extends Scene {
             }
 
             e.updateValues(players);
-            checkCollect(e);
         }
     }
 
