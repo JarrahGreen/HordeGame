@@ -75,7 +75,7 @@ public class StartScene extends Scene {
                     }
                 }
                 if (currentBackground == shop) {
-                    System.out.println("Shop");
+                    SceneManager.getSceneManager().setActiveScene(new ShopScene());
                 }
 
 
