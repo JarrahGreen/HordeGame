@@ -8,42 +8,73 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class SettingsScene extends Scene{
-    BufferedImage settingsStart, notIsHell, isHell;
+    BufferedImage settings_isHell,settings_Not_isHell,settings_Resolution_IsHell,settings_Resolution_notIsHell;
     private BufferedImage currentBackground;
+    BufferedImage[] backgrounds;
+
+    int i = 0;
 
     public SettingsScene() {
         try {
-            settingsStart = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings.png")));
-            isHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Settings_isHell.png")));
-            notIsHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Settings_notIsHell.png")));
+            settings_Not_isHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings_Not_isHell.png")));
+            settings_isHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings_isHell.png")));
+            settings_Resolution_notIsHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings_Resolution_notIsHell.png")));
+            settings_Resolution_IsHell = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title_settings_Resolution_IsHell.png")));
+            backgrounds = new BufferedImage[]{settings_Not_isHell,settings_isHell,settings_Resolution_notIsHell, settings_Resolution_IsHell};
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        currentBackground = settingsStart;
+        currentBackground = backgrounds[i];
     }
+
+
+
 
     @Override
     public void keyPressed(KeyEvent e) {
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_DOWN: {
-
-            }
-            case KeyEvent.VK_UP: {
-
-            }
-            case KeyEvent.VK_ENTER: {
-                if (currentBackground == notIsHell) {
-                    GameScene.isHell = true;
-                    currentBackground = isHell;
-                    System.out.println("Hell mode activated");
+                if (i < 2) {
+                    i +=2;
                 }
-                if (currentBackground == isHell) {
+                currentBackground = backgrounds[i];
+                break;
+            }
+
+            case KeyEvent.VK_UP: {
+                if (i > 1) {
+                    i-=2;
+
+                }
+                currentBackground = backgrounds[i];
+                break;
+            }
+
+
+
+
+            case KeyEvent.VK_ENTER: {
+                if (currentBackground == backgrounds[0]) {
+                    i+=1;
+                    System.out.println(i);
+                    currentBackground = backgrounds[i];
+
+                    GameScene.isHell = true;
+                    System.out.println("Hell mode activated");
+
+                }
+                else if (currentBackground == backgrounds[1]) {
+                    i-=1;
+                    System.out.println(i);
+                    currentBackground = backgrounds[0];
+
                     GameScene.isHell = false;
-                    currentBackground = notIsHell;
                     System.out.println("Hell mode de-activated");
                 }
+
             }
         }
     }

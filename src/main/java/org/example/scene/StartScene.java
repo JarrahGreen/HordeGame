@@ -67,18 +67,22 @@ public class StartScene extends Scene {
                     SceneManager.getSceneManager().setActiveScene(new GameScene(numPlayers));
 
                 }
+                if (currentBackground == settings) {
+                    SceneManager.getSceneManager().setActiveScene(new SettingsScene());
+                }
+
 
                 /*
                 if (currentBackground == shop) {
                     SceneManager.getSceneManager().setActiveScene(new ShopScene());
                 }
 
-                if (currentBackground == settings) {
-                    SceneManager.getSceneManager().setActiveScene(new SettingsScene());
-                }
 
 
                  */
+
+
+
 
             }
         }
