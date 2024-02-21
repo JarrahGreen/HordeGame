@@ -6,7 +6,6 @@ import org.example.scene.StartScene;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
 
 public class SceneManager implements KeyListener {
@@ -37,11 +36,7 @@ public class SceneManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        try {
-            activeScene.keyPressed(e);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
+        activeScene.keyPressed(e);
     }
 
     @Override
