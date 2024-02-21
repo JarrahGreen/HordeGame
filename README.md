@@ -18,4 +18,4 @@ Player 2:
 
 **ENTER** to shoot
 
-Any bugs please let me know [here](https://www.google.com/searchq=youtube+rick+roll&oq=youtube+rick+ro&gs_lcrp=EgZjaHJvbWUqCggAEAAY4wIYgAQyCggAEAAY4wIYgAQyBwgBEC4YgAQyBggCEEUYOTIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABKgCALACAA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:38b14088,vid:dQw4w9WgXcQ,st:0)
+Any bugs please let me know [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
