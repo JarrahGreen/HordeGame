@@ -18,4 +18,7 @@ Player 2:
 
 **ENTER** to shoot
 
-Any bugs please let me know [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+Other Information
+-----------------
+
+> Any bugs please let me know [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
