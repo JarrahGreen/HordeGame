@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
+
 public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
@@ -21,7 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private final SceneManager sceneManager;
 
-    public GamePanel() {
+    public GamePanel(){
         this.sceneManager = SceneManager.getSceneManager();
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setDoubleBuffered(true);

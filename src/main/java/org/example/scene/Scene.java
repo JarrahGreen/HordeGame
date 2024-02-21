@@ -4,6 +4,7 @@ package org.example.scene;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 
 public class Scene extends JComponent {
@@ -13,7 +14,7 @@ public class Scene extends JComponent {
 
     public void draw(Graphics g) {}
 
-    public void keyPressed(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) throws IOException {}
 
     public void keyReleased(KeyEvent e) {}
 

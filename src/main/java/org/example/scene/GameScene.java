@@ -176,9 +176,10 @@ public class GameScene extends Scene {
                     money = score;
 
                     try {
-                        FileWriter myWriter = new FileWriter("Money");
+                        FileWriter myWriter = new FileWriter("Money", true);
                         String toString = money.toString();
                         myWriter.write(toString);
+                        myWriter.write("\n");
 
                         myWriter.close();
                     } catch (IOException e) {

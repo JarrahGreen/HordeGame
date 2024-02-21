@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -14,10 +15,11 @@ public class StartScene extends Scene {
     private final BufferedImage shop;
     BufferedImage[] backgrounds;
 
+
     int i = 0;
     private BufferedImage currentBackground;
 
-    public StartScene() {
+    public StartScene(){
         try {
             BufferedImage title1p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-1.png")));
             title2p = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Title-2.png")));
@@ -27,6 +29,7 @@ public class StartScene extends Scene {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         currentBackground = backgrounds[0];
 
 

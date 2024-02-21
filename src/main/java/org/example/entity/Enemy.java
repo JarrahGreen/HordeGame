@@ -11,10 +11,12 @@ import java.util.Optional;
 
 
 public class Enemy extends Entity{
+    int enemySpeed = 2;
+
 
     public Enemy(int x, int y) {
         super(x, y, GamePanel.tileSize, GamePanel.tileSize);
-        this.speed = 2;
+        this.speed = enemySpeed;
         getEnemyImage();
     }
 

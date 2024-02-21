@@ -6,16 +6,17 @@ import org.example.scene.StartScene;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 
 public class SceneManager implements KeyListener {
     private static SceneManager _instance;
 
     private Scene activeScene;
-    private SceneManager() {
+    private SceneManager(){
         activeScene = new StartScene();
     }
-    public static SceneManager getSceneManager() {
+    public static SceneManager getSceneManager(){
         if (_instance == null) {
             _instance = new SceneManager();
         }
@@ -36,7 +37,11 @@ public class SceneManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        activeScene.keyPressed(e);
+        try {
+            activeScene.keyPressed(e);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
