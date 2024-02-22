@@ -1,5 +1,7 @@
 package org.example.scene;
 
+import org.example.SceneManager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -25,7 +27,6 @@ public class SettingsScene extends Scene{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         currentBackground = backgrounds[i];
     }
 
@@ -64,6 +65,7 @@ public class SettingsScene extends Scene{
 
                     GameScene.isHell = true;
                     System.out.println("Hell mode activated");
+                    break;
 
                 }
                 else if (currentBackground == backgrounds[1]) {
@@ -73,8 +75,15 @@ public class SettingsScene extends Scene{
 
                     GameScene.isHell = false;
                     System.out.println("Hell mode de-activated");
+                    break;
                 }
+                else {
+                    break;
+                }
+            }
 
+            case KeyEvent.VK_ESCAPE: {
+                SceneManager.getSceneManager().setActiveScene(new StartScene());
             }
         }
     }
@@ -83,9 +92,4 @@ public class SettingsScene extends Scene{
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(currentBackground, 0, 0, null);
     }
-
-
-
-
 }
-

@@ -249,7 +249,7 @@ public class GameScene extends Scene {
             p.draw(g);
         }
         g.setColor(Color.WHITE);
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 100));
+        g.setFont(new Font("", Font.PLAIN, 100));
         g.drawString(String.valueOf(score), 5,75);
     }
 

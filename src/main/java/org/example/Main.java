@@ -2,17 +2,17 @@ package org.example;
 import javax.swing.JFrame;
 
 
+
 public class  Main {
     public static void main(String[] args){
-        // todo Have a setting screen (add in isHell and resolution)
         // todo Add way of storing your scores as  money
         // todo create a shop
-
+        // todo Add music
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-        window.setTitle("Horde Game");
+        window.setTitle("Survive The Horde");
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
