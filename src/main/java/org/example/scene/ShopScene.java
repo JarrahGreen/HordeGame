@@ -1,7 +1,10 @@
 package org.example.scene;
 
+import org.example.SceneManager;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
@@ -19,6 +22,20 @@ public class ShopScene extends Scene{
 
         currentBackground = shopStart;
     }
+
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_ESCAPE: {
+                SceneManager.getSceneManager().setActiveScene(new StartScene());
+            }
+            case KeyEvent.VK_DOWN: {
+
+            }
+        }
+
+    }
+
+
 
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
