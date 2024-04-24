@@ -5,7 +5,7 @@ import org.example.entity.Entity;
 import java.awt.*;
 
 public class Projectiles extends Entity {
-    public static final int diameter = 10;
+    public static int diameter = 10;
     Color color = Color.cyan;
     public final Entity source;
 

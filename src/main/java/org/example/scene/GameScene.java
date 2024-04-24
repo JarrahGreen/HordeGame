@@ -11,10 +11,7 @@ import org.example.GamePanel;
 import org.example.SceneManager;
 import org.example.entity.*;
 import org.example.entity.Projectiles.Bullet;
-import org.example.entity.powerup.FireSpeedUp;
-import org.example.entity.powerup.MachineGun;
-import org.example.entity.powerup.Powerup;
-import org.example.entity.powerup.SpeedBoost;
+import org.example.entity.powerup.*;
 import org.example.entity.Projectiles.Projectiles;
 import java.io.FileWriter;
 
@@ -29,9 +26,15 @@ public class GameScene extends Scene {
     public static long startPickedUpMachineGun;
     public static long endPickedUpMachineGun;
 
+    public static boolean pickedUpGrenade = false;
+    public static boolean holdingGrenade = false;
+    public static long startPickedUpGrenade;
+    public static long endPickedUpGrenade;
+
     int machineGunSpawnRate = 4000;
     int fireSpeedUpSpawnRate = 2000;
     int speedBoostSpawnRate = 2000;
+    int GrenadeSpawnRate = 4000;
 
     ArrayList<Enemy> enemyList = new ArrayList<>();
     ArrayList<Enemy> enemiesToRemove = new ArrayList<>();
@@ -92,11 +95,22 @@ public class GameScene extends Scene {
             p.move(heldKeys, dt);
             p.update(dt);
             checkCollect(p);
+
+
             if (p.didShoot()) {
-                projectileList.add(new Bullet(
-                        p.x + (double) p.width / 2, p.y + (double) p.height / 2,
-                        p.lastDirection, p
-                ));
+                if (holdingGrenade) {
+                    projectileList.add(new Bullet(
+                            p.x, p.y, p.lastDirection, p
+                    ));
+                }
+
+                else {
+                    projectileList.add(new Bullet(
+                            p.x + (double) p.width / 2, p.y + (double) p.height / 2,
+                            p.lastDirection, p
+                    ));
+                }
+
             }
         }
 
@@ -117,6 +131,13 @@ public class GameScene extends Scene {
 
         if (rng.nextInt(machineGunSpawnRate) == 0) {
             powerUpList.add(new MachineGun(
+                    rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
+                    rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
+            ));
+        }
+
+        if (rng.nextInt(GrenadeSpawnRate) == 0) {
+            powerUpList.add(new Grenade(
                     rng.nextInt(GamePanel.screenWidth - Powerup.diameter),
                     rng.nextInt(GamePanel.screenHeight - Powerup.diameter)
             ));
@@ -202,6 +223,10 @@ public class GameScene extends Scene {
                 if (p instanceof MachineGun) {
                     pickedUpMachineGun = true;
                 }
+                if (p instanceof Grenade) {
+                    pickedUpGrenade = true;
+                }
+
                 powerUpsToRemove.add(p);
             }
         }
@@ -215,7 +240,7 @@ public class GameScene extends Scene {
             holdingMachineGun = true;
         }
 
-        // Check if the Machine gun has been help for 5 Seconds
+        // Check if the Machine gun has been held for 5 Seconds
         if (holdingMachineGun) {
             endPickedUpMachineGun = System.currentTimeMillis();
 
@@ -224,6 +249,25 @@ public class GameScene extends Scene {
                 holdingMachineGun = false;
             }
         }
+
+        if (pickedUpGrenade) {
+            startPickedUpGrenade = System.currentTimeMillis();
+            pickedUpGrenade = false;
+            holdingGrenade = true;
+        }
+
+        // Check if the Grenade has been held for 5 Seconds
+        if (holdingGrenade) {
+            endPickedUpGrenade = System.currentTimeMillis();
+
+            if (endPickedUpGrenade - startPickedUpGrenade > 1000) {
+                Bullet.diameter = 10;
+                holdingGrenade = false;
+            }
+        }
+
+
+
     }
 
 
